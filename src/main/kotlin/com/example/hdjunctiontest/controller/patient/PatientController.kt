@@ -4,6 +4,8 @@ import com.example.hdjunctiontest.application.patient.PatientApplication
 import com.example.hdjunctiontest.common.responose.ApiResponse
 import com.example.hdjunctiontest.model.patient.PatientsSearchTypeResponse
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -20,4 +22,13 @@ class PatientController(
             patientApplication.types()
         )
     }
+
+//    @PostMapping
+//    fun insert(
+////        @RequestBody
+//    ): ApiResponse<Unit> {
+//        return ApiResponse.success(
+//            patientApplication.types()
+//        )
+//    }
 }
