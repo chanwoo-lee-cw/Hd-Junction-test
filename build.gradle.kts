@@ -34,6 +34,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
 
     // JPA
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")
     implementation("com.querydsl:querydsl-core:${queryDslVersion}")
     kapt("com.querydsl:querydsl-apt:${queryDslVersion}:jakarta")
