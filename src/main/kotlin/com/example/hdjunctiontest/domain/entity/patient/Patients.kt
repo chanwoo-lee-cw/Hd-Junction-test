@@ -1,6 +1,8 @@
 package com.example.hdjunctiontest.domain.entity.patient
 
 import com.example.hdjunctiontest.domain.entity.BaseEntity
+import com.example.hdjunctiontest.dto.patient.PatientSaveDto
+import com.example.hdjunctiontest.type.GenderType
 import jakarta.persistence.*
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
@@ -26,7 +28,7 @@ class Patients(
     val patientCode: String,
 
     @Column(nullable = false, name = "gender_code", length = 10)
-    val genderCode: String,
+    val genderCode: GenderType,
 
     @Column(nullable = false, name = "birth_day", length = 10)
     val birthDay: String?,
@@ -39,9 +41,25 @@ class Patients(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: BigInteger,
+    val id: Long? = null,
 ) : BaseEntity() {
     fun delete() {
         this.deletedAt = Instant.now()
+    }
+
+    companion object {
+
+        fun of(dto: PatientSaveDto): Patients {
+            with(dto) {
+                return Patients(
+                    hospitalId = hospitalId,
+                    name = name,
+                    patientCode = patientCode,
+                    genderCode = genderCode,
+                    birthDay = birthDay,
+                    phoneNumber = phoneNumber,
+                )
+            }
+        }
     }
 }
