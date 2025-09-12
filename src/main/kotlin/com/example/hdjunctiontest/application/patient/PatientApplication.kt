@@ -1,8 +1,10 @@
 package com.example.hdjunctiontest.application.patient
 
 import com.example.hdjunctiontest.dto.patient.PatientSaveDto
+import com.example.hdjunctiontest.dto.patient.PatientUpdateDto
 import com.example.hdjunctiontest.model.TypeModel
 import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
+import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
 import com.example.hdjunctiontest.model.patient.PatientsTypeResponse
 import com.example.hdjunctiontest.service.patient.PatientService
 import com.example.hdjunctiontest.type.GenderType
@@ -26,6 +28,15 @@ class PatientApplication(
     ) {
         patientService.registerPatient(
             PatientSaveDto.of(registerRequest)
+        )
+    }
+
+
+    fun updatePatient(
+        updateRequest: PatientUpdateRequest
+    ) {
+        patientService.updatePatient(
+            PatientUpdateDto.of(updateRequest)
         )
     }
 }

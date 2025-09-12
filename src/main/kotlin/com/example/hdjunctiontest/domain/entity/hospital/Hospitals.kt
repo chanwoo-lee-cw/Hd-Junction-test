@@ -38,7 +38,7 @@ class Hospitals(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: BigInteger,
+    val id: Long,
 ) : BaseEntity() {
 
     fun delete() {

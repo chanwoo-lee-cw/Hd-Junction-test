@@ -21,10 +21,10 @@ import java.time.Instant
 @Table(name = "visits")
 class Visits(
     @Column(nullable = false, name = "hospital_id")
-    val hospitalId: BigInteger,
+    val hospitalId: Long,
 
     @Column(nullable = false, name = "patient_id")
-    val patientId: BigInteger,
+    val patientId: Long,
 
     @Column(nullable = false, name = "visited_date")
     val visitedDate: Instant,
@@ -37,7 +37,7 @@ class Visits(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: BigInteger,
+    val id: Long,
 ) {
     fun delete() {
         this.deletedAt = Instant.now()

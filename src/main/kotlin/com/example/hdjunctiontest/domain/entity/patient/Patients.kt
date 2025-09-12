@@ -2,13 +2,13 @@ package com.example.hdjunctiontest.domain.entity.patient
 
 import com.example.hdjunctiontest.domain.entity.BaseEntity
 import com.example.hdjunctiontest.dto.patient.PatientSaveDto
+import com.example.hdjunctiontest.dto.patient.PatientUpdateDto
 import com.example.hdjunctiontest.type.GenderType
 import jakarta.persistence.*
 import org.hibernate.annotations.DynamicInsert
 import org.hibernate.annotations.DynamicUpdate
 import org.hibernate.annotations.SQLDelete
 import org.hibernate.annotations.SQLRestriction
-import java.math.BigInteger
 import java.time.Instant
 
 @Entity
@@ -19,22 +19,22 @@ import java.time.Instant
 @Table(name = "patients")
 class Patients(
     @Column(nullable = false, name = "hospital_id")
-    val hospitalId: BigInteger,
+    val hospitalId: Long,
 
     @Column(nullable = false, name = "name", length = 45)
-    val name: String,
+    var name: String,
 
     @Column(nullable = false, name = "patient_code", length = 13)
     val patientCode: String,
 
     @Column(nullable = false, name = "gender_code", length = 10)
-    val genderCode: GenderType,
+    var genderCode: GenderType,
 
     @Column(nullable = false, name = "birth_day", length = 10)
-    val birthDay: String?,
+    var birthDay: String?,
 
     @Column(nullable = false, name = "phone_number", length = 20)
-    val phoneNumber: String?,
+    var phoneNumber: String?,
 
     @Column(name = "deleted_at")
     var deletedAt: Instant? = null,
@@ -47,8 +47,14 @@ class Patients(
         this.deletedAt = Instant.now()
     }
 
-    companion object {
+    fun update(dto: PatientUpdateDto) {
+        this.name = name
+        this.genderCode = genderCode
+        this.birthDay = birthDay
+        this.phoneNumber = phoneNumber
+    }
 
+    companion object {
         fun of(dto: PatientSaveDto): Patients {
             with(dto) {
                 return Patients(

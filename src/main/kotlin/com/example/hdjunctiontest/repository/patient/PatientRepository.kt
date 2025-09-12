@@ -6,4 +6,6 @@ import java.math.BigInteger
 
 interface PatientRepository : JpaRepository<Patients, BigInteger> {
     fun save(patient: Patients)
+
+    fun findById(id: Long): Patients?
 }
