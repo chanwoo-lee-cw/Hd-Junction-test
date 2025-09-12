@@ -6,16 +6,15 @@ import com.example.hdjunctiontest.domain.entity.patient.Patients
 import com.example.hdjunctiontest.dto.patient.PatientSaveDto
 import com.example.hdjunctiontest.dto.patient.PatientUpdateDto
 import com.example.hdjunctiontest.repository.patient.PatientRepository
-
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Transactional(readOnly = true)
 @Service
 class PatientService(
-    private val patientRepository: PatientRepository
+    private val patientRepository: PatientRepository,
 ) {
-
     @Transactional
     fun registerPatient(patientSaveDto: PatientSaveDto) {
         patientRepository.save(
@@ -25,11 +24,12 @@ class PatientService(
 
     @Transactional
     fun updatePatient(patientUpdateDto: PatientUpdateDto) {
-        val patient = patientRepository.findById(patientUpdateDto.id)
-        if (patient == null) {
-            throw EntityNotFoundException(ExceptionCode.NOT_FIND_ENTITY_BY_ID)
-        }
+        val patient = getEntityById(patientUpdateDto.id)
         patient.update(patientUpdateDto)
         patientRepository.save(patient)
     }
+
+
+    private fun getEntityById(id: Long) =
+        patientRepository.findByIdOrNull(id) ?: throw EntityNotFoundException(ExceptionCode.NOT_FIND_ENTITY_BY_ID)
 }

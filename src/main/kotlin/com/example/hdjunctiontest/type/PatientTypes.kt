@@ -14,8 +14,8 @@ enum class PatientSearchType(val value: String) {
 }
 
 enum class GenderType(val value: String) {
-    MALE("남자"),
-    FEMALE("여자");
+    M("남자"),
+    F("여자");
 
     companion object {
         val typeEntries: List<GenderType>
