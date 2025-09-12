@@ -23,6 +23,7 @@ class PatientApplication(
         )
     }
 
+
     fun registerPatient(
         registerRequest: PatientRegisterRequest
     ) {
@@ -40,5 +41,12 @@ class PatientApplication(
             id,
             PatientUpdateDto.of(updateRequest)
         )
+    }
+
+
+    fun deletePatient(
+        id: Long,
+    ) {
+        patientService.deletePatient(id)
     }
 }

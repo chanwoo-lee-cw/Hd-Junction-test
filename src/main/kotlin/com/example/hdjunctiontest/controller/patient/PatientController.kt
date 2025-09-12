@@ -42,4 +42,13 @@ class PatientController(
         patientApplication.updatePatient(id, updateRequest)
         return ApiResponse.success()
     }
+
+    @Operation(summary = "환자 삭제")
+    @DeleteMapping("{id}")
+    fun delete(
+        @PathVariable id: Long,
+    ): ApiResponse<Unit> {
+        patientApplication.deletePatient(id)
+        return ApiResponse.success()
+    }
 }

@@ -22,6 +22,7 @@ class PatientService(
         )
     }
 
+
     @Transactional
     fun updatePatient(
         id: Long,
@@ -29,6 +30,16 @@ class PatientService(
     ) {
         val patient = getEntityById(id)
         patient.update(patientUpdateDto)
+        patientRepository.save(patient)
+    }
+
+
+    @Transactional
+    fun deletePatient(
+        id: Long,
+    ) {
+        val patient = getEntityById(id)
+        patient.delete()
         patientRepository.save(patient)
     }
 
