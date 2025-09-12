@@ -7,20 +7,22 @@ import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
 import com.example.hdjunctiontest.model.patient.PatientsResponse
 import com.example.hdjunctiontest.model.patient.PatientsTypeResponse
+import com.example.hdjunctiontest.service.code.CodeService
 import com.example.hdjunctiontest.service.patient.PatientService
-import com.example.hdjunctiontest.type.GenderType
+import com.example.hdjunctiontest.type.CodeGroupType
 import com.example.hdjunctiontest.type.PatientSearchType
 import org.springframework.stereotype.Service
 
 @Service
 class PatientApplication(
     private val patientService: PatientService,
+    private val codeService: CodeService,
 ) {
 
     fun types(): PatientsTypeResponse {
         return PatientsTypeResponse(
             searchType = PatientSearchType.typeEntries.map { TypeModel(it, it.value) },
-            genderType = GenderType.typeEntries.map { TypeModel(it, it.value) }
+            genderType = codeService.findAllByCodeGroup(CodeGroupType.GENDER).map { TypeModel(it.code, it.codeName) },
         )
     }
 

@@ -11,7 +11,7 @@ data class PatientsTypeResponse (
     @Schema(description = "환자 검색 타입")
     val searchType: List<TypeModel<PatientSearchType>>,
     @Schema(description = "성별 타입")
-    val genderType: List<TypeModel<GenderType>>
+    val genderType: List<TypeModel<String>>
 )
 
 @Schema
