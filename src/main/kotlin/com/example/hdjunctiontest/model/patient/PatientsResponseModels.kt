@@ -4,6 +4,7 @@ import com.example.hdjunctiontest.model.TypeModel
 import com.example.hdjunctiontest.type.GenderType
 import com.example.hdjunctiontest.type.PatientSearchType
 import io.swagger.v3.oas.annotations.media.Schema
+import java.time.Instant
 
 @Schema(description = "환자 타입")
 data class PatientsTypeResponse (
@@ -26,5 +27,12 @@ data class PatientsResponse (
     @Schema(description = "생년 월일")
     val birthDay: String?,
     @Schema(description = "전화 번호")
-    val phoneNumber: String?
-)
+    val phoneNumber: String?,
+    @Schema(description = "방문 리스트")
+    val visits: List<VisitsListResponse>
+) {
+    data class VisitsListResponse (
+        val visitedDate: Instant,
+        val receiptStatusCode: String
+    )
+}

@@ -35,6 +35,12 @@ class PatientApplication(
                 genderCode = genderCode.value,
                 birthDay = birthDay,
                 phoneNumber = phoneNumber,
+                visits = visits.map {
+                    PatientsResponse.VisitsListResponse(
+                        it.visitedDate,
+                        it.receiptStatusCode
+                    )
+                }
             )
         }
     }

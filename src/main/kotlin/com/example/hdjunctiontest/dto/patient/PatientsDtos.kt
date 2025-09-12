@@ -1,6 +1,7 @@
 package com.example.hdjunctiontest.dto.patient
 
 import com.example.hdjunctiontest.domain.entity.patient.Patients
+import com.example.hdjunctiontest.dto.visited.VisitsListDto
 import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
 import com.example.hdjunctiontest.type.GenderType
@@ -13,6 +14,7 @@ data class PatientsDetailDto(
     val genderCode: GenderType,
     val birthDay: String?,
     val phoneNumber: String?,
+    val visits: List<VisitsListDto>
 ) {
     companion object {
         fun of(patients: Patients): PatientsDetailDto {
@@ -24,6 +26,7 @@ data class PatientsDetailDto(
                     genderCode = genderCode,
                     birthDay = birthDay,
                     phoneNumber = phoneNumber,
+                    visits = visits.map { VisitsListDto.of(it) }
                 )
             }
         }

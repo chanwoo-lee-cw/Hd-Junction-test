@@ -2,6 +2,7 @@ package com.example.hdjunctiontest.domain.entity.patient
 
 import com.example.hdjunctiontest.domain.entity.BaseEntity
 import com.example.hdjunctiontest.domain.entity.hospital.Hospitals
+import com.example.hdjunctiontest.domain.entity.visit.Visits
 import com.example.hdjunctiontest.dto.patient.PatientSaveDto
 import com.example.hdjunctiontest.dto.patient.PatientUpdateDto
 import com.example.hdjunctiontest.type.GenderType
@@ -25,6 +26,9 @@ class Patients(
 
     @Column(nullable = false, name = "hospital_id")
     val hospitalId: Long,
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient", cascade = [CascadeType.PERSIST], orphanRemoval = true)
+    val visits: List<Visits> = mutableListOf(),
 
     @Column(nullable = false, name = "name", length = 45)
     var name: String,
