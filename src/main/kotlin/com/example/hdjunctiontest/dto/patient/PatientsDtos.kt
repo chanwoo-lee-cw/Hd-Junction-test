@@ -1,9 +1,35 @@
 package com.example.hdjunctiontest.dto.patient
 
+import com.example.hdjunctiontest.domain.entity.patient.Patients
 import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
 import com.example.hdjunctiontest.type.GenderType
 import com.example.hdjunctiontest.util.RandomUtil
+
+data class PatientsDetailDto(
+    val name: String,
+    val hospitalName: String,
+    val patientCode: String,
+    val genderCode: GenderType,
+    val birthDay: String?,
+    val phoneNumber: String?,
+) {
+    companion object {
+        fun of(patients: Patients): PatientsDetailDto {
+            with(patients) {
+                return PatientsDetailDto(
+                    name = name,
+                    hospitalName = hospital?.name ?: "",
+                    patientCode = patientCode,
+                    genderCode = genderCode,
+                    birthDay = birthDay,
+                    phoneNumber = phoneNumber,
+                )
+            }
+        }
+    }
+}
+
 
 data class PatientSaveDto(
     val hospitalId: Long,

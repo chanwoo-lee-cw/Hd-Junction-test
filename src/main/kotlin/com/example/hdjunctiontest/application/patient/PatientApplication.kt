@@ -5,6 +5,7 @@ import com.example.hdjunctiontest.dto.patient.PatientUpdateDto
 import com.example.hdjunctiontest.model.TypeModel
 import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
+import com.example.hdjunctiontest.model.patient.PatientsResponse
 import com.example.hdjunctiontest.model.patient.PatientsTypeResponse
 import com.example.hdjunctiontest.service.patient.PatientService
 import com.example.hdjunctiontest.type.GenderType
@@ -21,6 +22,21 @@ class PatientApplication(
             searchType = PatientSearchType.typeEntries.map { TypeModel(it, it.value) },
             genderType = GenderType.typeEntries.map { TypeModel(it, it.value) }
         )
+    }
+
+    fun findDetailById(id: Long): PatientsResponse {
+        val patientDetailDto = patientService.findPatientById(id)
+
+        with(patientDetailDto) {
+            return PatientsResponse(
+                name = name,
+                hospitalName = hospitalName,
+                patientCode = patientCode,
+                genderCode = genderCode.value,
+                birthDay = birthDay,
+                phoneNumber = patientCode,
+            )
+        }
     }
 
 

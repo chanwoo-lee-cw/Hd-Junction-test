@@ -12,3 +12,19 @@ data class PatientsTypeResponse (
     @Schema(description = "성별 타입")
     val genderType: List<TypeModel<GenderType>>
 )
+
+@Schema
+data class PatientsResponse (
+    @Schema(description = "환자 이름")
+    val name: String,
+    @Schema(description = "병원 이름")
+    val hospitalName: String,
+    @Schema(description = "환자 등록 번호")
+    val patientCode: String,
+    @Schema(description = "환자 성별")
+    val genderCode: String,
+    @Schema(description = "생년 월일")
+    val birthDay: String?,
+    @Schema(description = "전화 번호")
+    val phoneNumber: String?
+)

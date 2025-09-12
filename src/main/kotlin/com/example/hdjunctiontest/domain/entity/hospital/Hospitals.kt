@@ -25,10 +25,8 @@ class Hospitals(
     @Column(nullable = false, name = "name", length = 45)
     val name: String,
 
-
     @Column(nullable = false, name = "institution_code", length = 20)
     val institutionCode: String,
-
 
     @Column(nullable = false, name = "owner_name", length = 10)
     val ownerName: String,

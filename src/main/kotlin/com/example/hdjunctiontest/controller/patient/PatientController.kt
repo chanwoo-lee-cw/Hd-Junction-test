@@ -4,6 +4,7 @@ import com.example.hdjunctiontest.application.patient.PatientApplication
 import com.example.hdjunctiontest.common.responose.ApiResponse
 import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
+import com.example.hdjunctiontest.model.patient.PatientsResponse
 import com.example.hdjunctiontest.model.patient.PatientsTypeResponse
 import io.swagger.v3.oas.annotations.Operation
 import jakarta.validation.Valid
@@ -31,6 +32,17 @@ class PatientController(
     ): ApiResponse<Unit> {
         patientApplication.registerPatient(registerRequest)
         return ApiResponse.success()
+    }
+
+
+    @Operation(summary = "환자 조회")
+    @GetMapping("{id}")
+    fun findOne(
+        @PathVariable id: Long,
+    ): ApiResponse<PatientsResponse> {
+        return ApiResponse.success(
+            patientApplication.findDetailById(id)
+        )
     }
 
     @Operation(summary = "환자 수정")
