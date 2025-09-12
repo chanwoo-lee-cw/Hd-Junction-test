@@ -20,6 +20,7 @@ class CodeGroup(
     @Column(nullable = false, name = "code_group_name", length = 10)
     val codeGroupName: String,
 
-    @Column(nullable = false, name = "description", length = 10)
+    // 10글자로 부족
+    @Column(nullable = false, name = "description", length = 63)
     val description: String,
 )

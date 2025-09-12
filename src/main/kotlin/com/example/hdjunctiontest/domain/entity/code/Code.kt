@@ -20,6 +20,6 @@ class Code (
     @Column(nullable = false, name = "code_group")
     val codeGroup: String,
 
-    @Column(nullable = false, name = "codeName", length = 10)
+    @Column(nullable = false, name = "code_name", length = 10)
     val codeName: String,
 )

@@ -18,10 +18,8 @@ data class PatientRegisterRequest (
 )
 
 
-@Schema(description = "환자 등록")
+@Schema(description = "환자 수정")
 data class PatientUpdateRequest (
-    @Schema(description = "환자 ID")
-    val id: Long,
     @Schema(description = "환자명")
     val name: String,
     @Schema(description = "성별 코드")

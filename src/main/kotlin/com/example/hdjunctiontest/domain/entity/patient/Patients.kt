@@ -1,6 +1,7 @@
 package com.example.hdjunctiontest.domain.entity.patient
 
 import com.example.hdjunctiontest.domain.entity.BaseEntity
+import com.example.hdjunctiontest.domain.entity.hospital.Hospitals
 import com.example.hdjunctiontest.dto.patient.PatientSaveDto
 import com.example.hdjunctiontest.dto.patient.PatientUpdateDto
 import com.example.hdjunctiontest.type.GenderType
@@ -18,6 +19,10 @@ import java.time.Instant
 @SQLDelete(sql = "update patients set deleted_at = CURRENT_TIMESTAMP where id = ?")
 @Table(name = "patients")
 class Patients(
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hospital_id", nullable = false, insertable = false, updatable = false)
+    val hospital: Hospitals? = null,
+
     @Column(nullable = false, name = "hospital_id")
     val hospitalId: Long,
 
@@ -27,6 +32,7 @@ class Patients(
     @Column(nullable = false, name = "patient_code", length = 13)
     val patientCode: String,
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, name = "gender_code", length = 10)
     var genderCode: GenderType,
 

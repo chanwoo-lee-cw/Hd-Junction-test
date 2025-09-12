@@ -33,9 +33,11 @@ class PatientApplication(
 
 
     fun updatePatient(
+        id: Long,
         updateRequest: PatientUpdateRequest
     ) {
         patientService.updatePatient(
+            id,
             PatientUpdateDto.of(updateRequest)
         )
     }

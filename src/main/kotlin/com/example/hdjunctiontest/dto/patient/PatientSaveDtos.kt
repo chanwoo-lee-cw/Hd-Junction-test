@@ -31,7 +31,6 @@ data class PatientSaveDto(
 
 
 data class PatientUpdateDto(
-    val id: Long,
     val name: String,
     val genderCode: GenderType,
     val birthDay: String?,
@@ -41,7 +40,6 @@ data class PatientUpdateDto(
         fun of(request: PatientUpdateRequest): PatientUpdateDto {
             with(request) {
                 return PatientUpdateDto(
-                    id = id,
                     name = name,
                     genderCode = genderCode,
                     birthDay = birthDay,

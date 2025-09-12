@@ -34,11 +34,12 @@ class PatientController(
     }
 
     @Operation(summary = "환자 수정")
-    @PutMapping
+    @PutMapping("{id}")
     fun update(
+        @PathVariable id: Long,
         @RequestBody @Valid updateRequest: PatientUpdateRequest
     ): ApiResponse<Unit> {
-        patientApplication.updatePatient(updateRequest)
+        patientApplication.updatePatient(id, updateRequest)
         return ApiResponse.success()
     }
 }

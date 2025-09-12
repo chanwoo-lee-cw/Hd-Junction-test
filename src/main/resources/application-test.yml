@@ -11,7 +11,7 @@ spring:
 
   config:
     activate:
-      on-profile: local
+      on-profile: test
 
   sql:
     init:
