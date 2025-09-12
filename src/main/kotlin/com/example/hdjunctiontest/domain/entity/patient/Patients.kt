@@ -29,7 +29,7 @@ class Patients(
     @Column(nullable = false, name = "name", length = 45)
     var name: String,
 
-    @Column(nullable = false, name = "patient_code", length = 13)
+    @Column(nullable = false, name = "patient_code", length = 13, unique = true)
     val patientCode: String,
 
     @Enumerated(EnumType.STRING)
@@ -54,10 +54,10 @@ class Patients(
     }
 
     fun update(dto: PatientUpdateDto) {
-        this.name = name
-        this.genderCode = genderCode
-        this.birthDay = birthDay
-        this.phoneNumber = phoneNumber
+        this.name = dto.name
+        this.genderCode = dto.genderCode
+        this.birthDay = dto.birthDay
+        this.phoneNumber = dto.phoneNumber
     }
 
     companion object {

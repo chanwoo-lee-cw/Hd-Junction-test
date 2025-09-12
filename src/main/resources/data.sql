@@ -12,3 +12,5 @@ INSERT INTO code (code_group, code, code_name) VALUES ('진료과목코드', '01
 INSERT INTO code (code_group, code, code_name) VALUES ('진료과목코드', '02', '안과');
 INSERT INTO code (code_group, code, code_name) VALUES ('진료유형코드', 'D', '약처방');
 INSERT INTO code (code_group, code, code_name) VALUES ('진료유형코드', 'T', '검사');
+
+INSERT INTO hospitals (name, institution_code, owner_name, created_at, updated_at) VALUES ('테스트 병원', '1234', '헬로월드', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

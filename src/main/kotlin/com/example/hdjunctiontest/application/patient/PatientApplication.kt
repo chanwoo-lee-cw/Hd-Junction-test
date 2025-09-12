@@ -34,7 +34,7 @@ class PatientApplication(
                 patientCode = patientCode,
                 genderCode = genderCode.value,
                 birthDay = birthDay,
-                phoneNumber = patientCode,
+                phoneNumber = phoneNumber,
             )
         }
     }
