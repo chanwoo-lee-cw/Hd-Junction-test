@@ -2,6 +2,11 @@ spring:
   profiles:
     active: dev
 
+  web:
+    pageable:
+      page-parameter: p       # page → p
+      size-parameter: pageSize
+
 logging:
   level:
     root: info

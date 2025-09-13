@@ -1,5 +1,6 @@
 package com.example.hdjunctiontest.model.patient
 
+import com.example.hdjunctiontest.dto.patient.PatientsListDto
 import com.example.hdjunctiontest.model.TypeModel
 import com.example.hdjunctiontest.type.GenderType
 import com.example.hdjunctiontest.type.PatientSearchType
@@ -14,7 +15,29 @@ data class PatientsTypeResponse (
     val genderType: List<TypeModel<String>>
 )
 
-@Schema
+
+@Schema(description = "환자 목록 조회")
+data class PatientsListResponse(
+    val name: String,
+    val patientCode: String,
+    val genderCode: GenderType,
+    val birthDay: String?,
+    val phoneNumber: String?,
+) {
+    companion object {
+        fun of(dto: PatientsListDto): PatientsListResponse {
+            return PatientsListResponse(
+                name = dto.name,
+                patientCode = dto.patientCode,
+                genderCode = dto.genderCode,
+                birthDay = dto.birthDay,
+                phoneNumber = dto.phoneNumber,
+            )
+        }
+    }
+}
+
+@Schema(description = "환자 상세 조회")
 data class PatientsResponse (
     @Schema(description = "환자 이름")
     val name: String,

@@ -1,7 +1,26 @@
 package com.example.hdjunctiontest.model.patient
 
+import com.example.hdjunctiontest.common.exception.ExceptionCode
+import com.example.hdjunctiontest.common.exception.InvalidRequestValueException
 import com.example.hdjunctiontest.type.GenderType
+import com.example.hdjunctiontest.type.PatientSearchType
 import io.swagger.v3.oas.annotations.media.Schema
+
+
+@Schema(description = "환자 목록 조회")
+data class PatientFilterRequest (
+    @Schema(description = "검색 조건")
+    val searchType: PatientSearchType? = null,
+    @Schema(description = "검색 값")
+    val searchValue: String? = null
+) {
+    init {
+        if (searchValue != null && searchType == null) {
+            throw InvalidRequestValueException(ExceptionCode.INVALID_REQUEST_NOT_SEARCH_TYPE)
+        }
+    }
+}
+
 
 @Schema(description = "환자 등록")
 data class PatientRegisterRequest (

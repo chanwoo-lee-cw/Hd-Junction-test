@@ -2,10 +2,21 @@ package com.example.hdjunctiontest.dto.patient
 
 import com.example.hdjunctiontest.domain.entity.patient.Patients
 import com.example.hdjunctiontest.dto.visited.VisitsListDto
+import com.example.hdjunctiontest.model.patient.PatientFilterRequest
 import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
 import com.example.hdjunctiontest.type.GenderType
+import com.example.hdjunctiontest.type.PatientSearchType
 import com.example.hdjunctiontest.util.RandomUtil
+import com.querydsl.core.annotations.QueryProjection
+
+data class PatientsListDto @QueryProjection constructor(
+    val name: String,
+    val patientCode: String,
+    val genderCode: GenderType,
+    val birthDay: String?,
+    val phoneNumber: String?,
+)
 
 data class PatientsDetailDto(
     val name: String,
@@ -27,6 +38,25 @@ data class PatientsDetailDto(
                     birthDay = birthDay,
                     phoneNumber = phoneNumber,
                     visits = visits.map { VisitsListDto.of(it) }
+                )
+            }
+        }
+    }
+}
+
+
+data class PatientFilterDto(
+    val searchType: PatientSearchType?,
+    val searchValue: String?
+) {
+    companion object {
+        fun of(
+            filterRequest: PatientFilterRequest
+        ): PatientFilterDto {
+            with(filterRequest) {
+                return PatientFilterDto(
+                    searchType=searchType,
+                    searchValue=searchValue,
                 )
             }
         }

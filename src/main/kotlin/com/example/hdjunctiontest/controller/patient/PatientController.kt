@@ -3,11 +3,19 @@ package com.example.hdjunctiontest.controller.patient
 import com.example.hdjunctiontest.application.patient.PatientApplication
 import com.example.hdjunctiontest.common.responose.ApiResponse
 import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
+import com.example.hdjunctiontest.model.patient.PatientFilterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
+import com.example.hdjunctiontest.model.patient.PatientsListResponse
 import com.example.hdjunctiontest.model.patient.PatientsResponse
 import com.example.hdjunctiontest.model.patient.PatientsTypeResponse
 import io.swagger.v3.oas.annotations.Operation
 import jakarta.validation.Valid
+import org.springdoc.core.annotations.ParameterObject
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
+import org.springframework.data.web.PageableDefault
+import org.springframework.data.web.SortDefault
 import org.springframework.web.bind.annotation.*
 
 
@@ -22,6 +30,17 @@ class PatientController(
     fun type(): ApiResponse<PatientsTypeResponse> {
         return ApiResponse.success(
             patientApplication.types()
+        )
+    }
+
+    @Operation(summary = "환자 목록 조회")
+    @GetMapping
+    fun findAllByPage(
+        @ParameterObject @Valid searchRequest: PatientFilterRequest,
+        @SortDefault(sort = ["id"], direction = Sort.Direction.DESC) @PageableDefault(size = 10) @ParameterObject pageable: Pageable
+    ): ApiResponse<Page<PatientsListResponse>> {
+        return ApiResponse.success(
+            patientApplication.findAllByPage(searchRequest, pageable)
         )
     }
 
