@@ -1,0 +1,47 @@
+= HD Junction Test API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
+== Introduction
+
+에이치디정션 백엔드 개발자 채용 온라인 과제
+지원자 : 이찬우
+
+== 환자 API
+
+=== GET 환자 타입 조회
+
+환자 API에서 사용할 타입을 조회한다.
+
+==== Request
+
+include::{snippets}/patient-types/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/patient-types/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/patient-types/response-fields.adoc[]
+
+
+=== 환자 등록
+
+새로운 환자를 등록한다
+
+==== Request
+
+include::{snippets}/patient-insert/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/patient-insert/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/patient-insert/response-fields.adoc[]
