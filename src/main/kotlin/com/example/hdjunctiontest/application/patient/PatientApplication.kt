@@ -41,6 +41,17 @@ class PatientApplication(
         val patientDetailDto = patientService.findPatientById(id)
 
         with(patientDetailDto) {
+            val visits = visits.map {
+                PatientsResponse.VisitsListResponse(
+                    it.visitedDate,
+                    it.receiptStatusCode,
+                    codeService.findByCodeAndCodeGroupType(it.receiptStatusCode, CodeGroupType.RECEIPT_STATUS).codeName,
+                    it.medicalSubjectCode,
+                    codeService.findByCodeAndCodeGroupType(it.medicalSubjectCode, CodeGroupType.MEDICAL_SUBJECT).codeName,
+                    it.medicalTypeCode,
+                    codeService.findByCodeAndCodeGroupType(it.medicalTypeCode, CodeGroupType.MEDICAL_TYPE).codeName,
+                )
+            }
             return PatientsResponse(
                 name = name,
                 hospitalName = hospitalName,
@@ -48,12 +59,7 @@ class PatientApplication(
                 genderCode = genderCode.value,
                 birthDay = birthDay,
                 phoneNumber = phoneNumber,
-                visits = visits.map {
-                    PatientsResponse.VisitsListResponse(
-                        it.visitedDate,
-                        it.receiptStatusCode
-                    )
-                }
+                visits = visits
             )
         }
     }

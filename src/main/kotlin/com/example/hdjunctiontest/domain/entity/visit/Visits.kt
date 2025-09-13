@@ -1,6 +1,5 @@
 package com.example.hdjunctiontest.domain.entity.visit
 
-import com.example.hdjunctiontest.domain.entity.hospital.Hospitals
 import com.example.hdjunctiontest.domain.entity.patient.Patients
 import jakarta.persistence.*
 import org.hibernate.annotations.DynamicInsert
@@ -19,6 +18,10 @@ class Visits(
     @Column(nullable = false, name = "hospital_id")
     val hospitalId: Long,
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "hospital_id", nullable = false, insertable = false, updatable = false)
+    val hospital: Patients? = null,
+
     @Column(nullable = false, name = "patient_id")
     val patientId: Long,
 
@@ -31,6 +34,12 @@ class Visits(
 
     @Column(nullable = false, name = "receipt_status_code")
     val receiptStatusCode: String,
+
+    @Column(nullable = false, name = "medical_subject_code")
+    val medicalSubjectCode: String,
+
+    @Column(nullable = false, name = "medical_type_code")
+    val medicalTypeCode: String,
 
     @Column(name = "deleted_at")
     var deletedAt: Instant? = null,

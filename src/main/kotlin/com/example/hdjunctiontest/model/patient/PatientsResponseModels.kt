@@ -54,8 +54,21 @@ data class PatientsResponse (
     @Schema(description = "방문 리스트")
     val visits: List<VisitsListResponse>
 ) {
+    @Schema(description = "방문 리스트")
     data class VisitsListResponse (
+        @Schema(description = "방문 날짜")
         val visitedDate: Instant,
-        val receiptStatusCode: String
+        @Schema(description = "방문 상태 코드")
+        val receiptStatusCode: String,
+        @Schema(description = "방문 상태")
+        val receiptStatus: String,
+        @Schema(description = "진료 과목 코드")
+        val medicalSubjectCode: String,
+        @Schema(description = "진료 과목")
+        val medicalSubject: String,
+        @Schema(description = "진료 유형 코드")
+        val medicalTypeCode: String,
+        @Schema(description = "진료 유형")
+        val medicalType: String,
     )
 }

@@ -14,6 +14,7 @@ enum class ExceptionCode(
 ) {
     // 400 에러
     BAD_REQUEST("BAD REQUEST", HttpStatus.BAD_REQUEST, "잘못된 요청입니다."),
+    NOT_FIND_ENTITY("NOT_FIND_ENTITY", HttpStatus.NOT_FOUND, "DB의 해당하는 데이터가 존재하지 않습니다."),
     NOT_FIND_ENTITY_BY_ID("NOT_FIND_ENTITY_BY_ID", HttpStatus.NOT_FOUND, "DB의 해당하는 데이터가 존재하지 않습니다."),
     INVALID_REQUEST_NOT_SEARCH_TYPE("INVALID_REQUEST_NOT_SEARCH_TYPE", HttpStatus.BAD_REQUEST, "검색 필터의 타입이 없습니다."),
 

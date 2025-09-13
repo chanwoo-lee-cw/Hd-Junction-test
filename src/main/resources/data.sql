@@ -15,4 +15,4 @@ INSERT INTO code (code_group, code, code_name) VALUES ('진료유형코드', 'T'
 
 INSERT INTO hospitals (name, institution_code, owner_name, created_at, updated_at) VALUES ('테스트 병원', '1234', '헬로월드', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 INSERT INTO patients (hospital_id, name, gender_code, patient_code, birth_day, phone_number, created_at, updated_at) VALUES (1, 'Hello','M','1','1', '1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO visits (hospital_id, patient_id, visited_date, receipt_status_code) VALUES (1, 1, CURRENT_TIMESTAMP, 'T');
+INSERT INTO visits (hospital_id, patient_id, visited_date, receipt_status_code, medical_subject_code, medical_type_code) VALUES (1, 1, CURRENT_TIMESTAMP, 2, '01', 'D');
