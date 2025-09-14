@@ -1,7 +1,6 @@
 package com.example.hdjunctiontest.controller.patient
 
 
-import com.example.hdjunctiontest.application.patient.PatientApplication
 import com.example.hdjunctiontest.model.TypeModel
 import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
@@ -11,13 +10,11 @@ import com.example.hdjunctiontest.type.GenderType
 import com.example.hdjunctiontest.type.PatientSearchType
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.BDDMockito.given
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
-import org.springframework.restdocs.RestDocumentationExtension
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*
 import org.springframework.restdocs.operation.preprocess.Preprocessors.*
@@ -25,34 +22,24 @@ import org.springframework.restdocs.payload.PayloadDocumentation.*
 import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
 import org.springframework.restdocs.request.RequestDocumentation.pathParameters
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import org.springframework.transaction.annotation.Transactional
 import java.time.Instant
 
 
+@SpringBootTest
+@AutoConfigureMockMvc
 @AutoConfigureRestDocs(outputDir = "build/generated-snippets")
-@WebMvcTest(PatientController::class)
-@ExtendWith(RestDocumentationExtension::class)
 @ActiveProfiles("test")
+@Transactional
 class PatientControllerTest(
     @Autowired val mockMvc: MockMvc,
     @Autowired val objectMapper: ObjectMapper,
 ) {
-    @MockitoBean
-    private lateinit var patientApplication: PatientApplication
-
     @Test
     fun type() {
         // given
-        val answer = PatientsTypeResponse(
-            searchType = PatientSearchType.typeEntries.map { TypeModel(it, it.value) },
-            genderType = listOf(
-                TypeModel(value = "M", label = "남"),
-                TypeModel(value = "F", label = "여")
-            ),
-        )
-        given(patientApplication.types()).willReturn(answer)
         // when
 
         // then
@@ -76,11 +63,14 @@ class PatientControllerTest(
                 )
             )
     }
-//
+
 //    @Test
 //    fun findAllByPage() {
-//    }
 //
+//        //given
+//        //w
+//    }
+
     @Test
     fun insert() {
         // given
@@ -123,27 +113,6 @@ class PatientControllerTest(
     fun findOne() {
         // given
         val id = 1L
-
-        val answer = PatientsResponse(
-            name = "Hello",
-            hospitalName = "테스트 병원",
-            patientCode = "1",
-            genderCode = "남자",
-            birthDay = "1",
-            phoneNumber = "1",
-            visits = listOf(
-                PatientsResponse.VisitsListResponse(
-                    visitedDate = Instant.now(),
-                    receiptStatusCode = "2",
-                    receiptStatus = "종료",
-                    medicalSubjectCode = "01",
-                    medicalSubject = "내과",
-                    medicalTypeCode = "D",
-                    medicalType = "약처방"
-                )
-            )
-        )
-        given(patientApplication.findDetailById(id)).willReturn(answer)
 
         // when
         // then
@@ -224,9 +193,33 @@ class PatientControllerTest(
             )
 
     }
-//
-//    @Test
-//    fun delete() {
-//    }
+
+    @Test
+    fun delete() {
+        // given
+        val id = 1L;
+        // when
+
+        // then
+        mockMvc.perform(
+            delete("/api/v1/patient/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON)
+        )
+            .andExpect(status().isOk)
+            .andDo(
+                document(
+                    "patient-delete",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint()),
+                    pathParameters(
+                        parameterWithName("id").description("환자 ID")
+                    ),
+                    responseFields(
+                        fieldWithPath("status").description("http 코드"),
+                        fieldWithPath("data").optional().description("항상 null")
+                    )
+                )
+            )
+    }
 
 }

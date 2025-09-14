@@ -114,3 +114,24 @@ include::{snippets}/patient-update/http-response.adoc[]
 ==== Response Fields
 
 include::{snippets}/patient-update/response-fields.adoc[]
+
+
+=== 환자 삭제
+
+환자의 정보를 삭제한다
+
+==== Request
+
+include::{snippets}/patient-delete/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/patient-delete/path-parameters.adoc[]
+
+==== Response
+
+include::{snippets}/patient-delete/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/patient-delete/response-fields.adoc[]
