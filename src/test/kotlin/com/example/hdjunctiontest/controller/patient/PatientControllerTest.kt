@@ -46,6 +46,8 @@ class PatientControllerTest(
             .andDo(
                 document(
                     "patient-types",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint()),
                     responseFields(
                         fieldWithPath("status").description("http 코드"),
                         subsectionWithPath("data.searchType").description("검색 타입 목록(label : 고객 표기용, value : 보내줘야할 값)"),

@@ -156,3 +156,22 @@ include::{snippets}/patient-delete/http-response.adoc[]
 ==== Response Fields
 
 include::{snippets}/patient-delete/response-fields.adoc[]
+
+
+== 방문 API
+
+=== 방문 타입 조회
+
+방문 API에서 사용할 타입을 조회한다.
+
+==== Request
+
+include::{snippets}/visit-types/http-request.adoc[]
+
+==== Response
+
+include::{snippets}/visit-types/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/visit-types/response-fields.adoc[]
