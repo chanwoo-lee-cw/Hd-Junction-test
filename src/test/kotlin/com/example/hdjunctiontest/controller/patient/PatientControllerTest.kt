@@ -1,13 +1,10 @@
 package com.example.hdjunctiontest.controller.patient
 
 
-import com.example.hdjunctiontest.model.TypeModel
+import com.example.hdjunctiontest.controller.util.TestUtils
 import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
-import com.example.hdjunctiontest.model.patient.PatientsResponse
-import com.example.hdjunctiontest.model.patient.PatientsTypeResponse
 import com.example.hdjunctiontest.type.GenderType
-import com.example.hdjunctiontest.type.PatientSearchType
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,13 +16,11 @@ import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*
 import org.springframework.restdocs.operation.preprocess.Preprocessors.*
 import org.springframework.restdocs.payload.PayloadDocumentation.*
-import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
-import org.springframework.restdocs.request.RequestDocumentation.pathParameters
+import org.springframework.restdocs.request.RequestDocumentation.*
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.transaction.annotation.Transactional
-import java.time.Instant
 
 
 @SpringBootTest
@@ -64,12 +59,44 @@ class PatientControllerTest(
             )
     }
 
-//    @Test
-//    fun findAllByPage() {
-//
-//        //given
-//        //w
-//    }
+    @Test
+    fun findAllByPage() {
+        // given
+//        val searchType = "NAME"
+//        val searchValue = "He"
+        // when
+        val answer = mockMvc.perform(
+            get("/api/v1/patient")
+//                .param("searchType", searchType)
+//                .param("searchValue", searchValue)
+                .accept(MediaType.APPLICATION_JSON)
+        )
+        // then
+        answer.andExpect(status().isOk)
+            .andDo(
+                document(
+                    "patient-list",
+                    preprocessRequest(prettyPrint()),
+                    preprocessResponse(prettyPrint()),
+                    queryParameters(
+                        parameterWithName("searchType").optional().description("검색 조건, `환자 타입 조회` 참고"),
+                        parameterWithName("searchValue").optional().description("검색 값"),
+                        parameterWithName("pageNo").optional().description("페이지 번호"),
+                        parameterWithName("pageSize").optional().description("페이지 사이즈"),
+                    ),
+                    responseFields(
+                        fieldWithPath("status").description("http 코드"),
+                        subsectionWithPath("data.content").description("환자 목록 정보"),
+                        fieldWithPath("data.content[].name").description("환자 이름"),
+                        fieldWithPath("data.content[].patientCode").description("환자 등록 번호"),
+                        fieldWithPath("data.content[].genderCode").description("환자 성별"),
+                        fieldWithPath("data.content[].birthDay").optional().description("생년 월일"),
+                        fieldWithPath("data.content[].phoneNumber").optional().description("전화 번호"),
+                        *TestUtils.getPageFieldsList()
+                    )
+                )
+            )
+    }
 
     @Test
     fun insert() {

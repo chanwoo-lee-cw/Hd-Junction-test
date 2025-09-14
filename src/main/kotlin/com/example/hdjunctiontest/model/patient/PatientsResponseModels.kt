@@ -18,10 +18,15 @@ data class PatientsTypeResponse (
 
 @Schema(description = "환자 목록 조회")
 data class PatientsListResponse(
+    @Schema(description = "환자 이름")
     val name: String,
+    @Schema(description = "환자 등록 번호")
     val patientCode: String,
+    @Schema(description = "환자 성별")
     val genderCode: GenderType,
+    @Schema(description = "생년 월일")
     val birthDay: String?,
+    @Schema(description = "전화 번호")
     val phoneNumber: String?,
 ) {
     companion object {

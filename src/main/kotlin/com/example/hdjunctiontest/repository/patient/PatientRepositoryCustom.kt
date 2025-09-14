@@ -31,8 +31,8 @@ class PatientRepositoryCustomImpl(
                 // DB 상황에 따라 match로 변경 필요
                 when (filter.searchType) {
                     null -> null
-                    PatientSearchType.NAME -> and(patients.name.like(it))
-                    PatientSearchType.PATIENT_CODE -> and(patients.patientCode.like(it))
+                    PatientSearchType.NAME -> and(patients.name.contains(it))
+                    PatientSearchType.PATIENT_CODE -> and(patients.patientCode.contains(it))
                     PatientSearchType.BIRTH_DAY -> and(patients.patientCode.eq(it))
                 }
             }
