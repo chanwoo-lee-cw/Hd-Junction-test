@@ -100,7 +100,7 @@ create table patients (
                           patient_code varchar(13) not null unique,
                           phone_number varchar(20) not null,
                           name varchar(45) not null,
-                          gender_code enum ('F','M') not null,
+                          gender_code varchar(10) not null,
                           primary key (id)
 );
 

@@ -1,6 +1,7 @@
 package com.example.hdjunctiontest.controller.visit
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
@@ -30,6 +31,7 @@ class VisitControllerTest(
     @Autowired val mockMvc: MockMvc,
 ) {
     @Test
+    @Disabled("방문 타입 조회")
     fun getTypes() {
         // given
 

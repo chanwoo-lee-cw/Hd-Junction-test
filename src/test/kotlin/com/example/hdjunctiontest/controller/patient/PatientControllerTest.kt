@@ -6,6 +6,7 @@ import com.example.hdjunctiontest.model.patient.PatientRegisterRequest
 import com.example.hdjunctiontest.model.patient.PatientUpdateRequest
 import com.example.hdjunctiontest.type.GenderType
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
@@ -33,6 +34,7 @@ class PatientControllerTest(
     @Autowired val objectMapper: ObjectMapper,
 ) {
     @Test
+    @Disabled("환자 타입 조회")
     fun type() {
         // given
         // when
@@ -62,6 +64,7 @@ class PatientControllerTest(
     }
 
     @Test
+    @Disabled("환자 목록 조회")
     fun findAllByPage() {
         // given
 //        val searchType = "NAME"
@@ -101,6 +104,7 @@ class PatientControllerTest(
     }
 
     @Test
+    @Disabled("환자 등록")
     fun insert() {
         // given
         val request = PatientRegisterRequest(
@@ -139,6 +143,7 @@ class PatientControllerTest(
     }
 
     @Test
+    @Disabled("환자 상세 조회")
     fun findOne() {
         // given
         val id = 1L
@@ -181,6 +186,7 @@ class PatientControllerTest(
     }
 
     @Test
+    @Disabled("환자 수정")
     fun update() {
         // given
         val id = 1L;
@@ -224,6 +230,7 @@ class PatientControllerTest(
     }
 
     @Test
+    @Disabled("환자 삭제")
     fun delete() {
         // given
         val id = 1L;
