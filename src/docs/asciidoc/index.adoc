@@ -11,6 +11,22 @@
 에이치디정션 백엔드 개발자 채용 온라인 과제
 지원자 : 이찬우
 
+
+== 공통
+
+=== 에러 포멧
+
+공통 에러 포멧입니다. 추가해야할 정보가 있을 경우에 아래의 포멧에서 추가됩니다.
+
+==== Response
+
+include::{snippets}/error-format/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/error-format/response-fields.adoc[]
+
+
 == 환자 API
 
 === GET 환자 타입 조회
@@ -38,6 +54,10 @@ include::{snippets}/patient-types/response-fields.adoc[]
 
 include::{snippets}/patient-insert/http-request.adoc[]
 
+==== Request Fields
+
+include::{snippets}/patient-insert/request-fields.adoc[]
+
 ==== Response
 
 include::{snippets}/patient-insert/http-response.adoc[]
@@ -45,3 +65,52 @@ include::{snippets}/patient-insert/http-response.adoc[]
 ==== Response Fields
 
 include::{snippets}/patient-insert/response-fields.adoc[]
+
+
+=== 환자 상세 조회
+
+환자의 정보를 조회한다.
+
+==== Request
+
+include::{snippets}/patient-details/http-request.adoc[]
+
+
+==== Path Parameters
+
+include::{snippets}/patient-details/path-parameters.adoc[]
+
+
+==== Response
+
+include::{snippets}/patient-details/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/patient-details/response-fields.adoc[]
+
+
+=== 환자 수정
+
+환자의 정보를 수정한다.
+
+==== Request
+
+include::{snippets}/patient-update/http-request.adoc[]
+
+==== Path Parameters
+
+include::{snippets}/patient-update/path-parameters.adoc[]
+
+==== Request Fields
+
+include::{snippets}/patient-insert/request-fields.adoc[]
+
+
+==== Response
+
+include::{snippets}/patient-update/http-response.adoc[]
+
+==== Response Fields
+
+include::{snippets}/patient-update/response-fields.adoc[]

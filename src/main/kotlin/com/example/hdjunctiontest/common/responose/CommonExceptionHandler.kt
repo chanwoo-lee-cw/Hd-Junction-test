@@ -43,7 +43,7 @@ class CommonExceptionHandler {
         val responseCode = ExceptionCode.SERVER_ERROR
 
         return ResponseEntity.of(
-            ProblemDetail.forStatusAndDetail(responseCode.httpStatus, exception.message)
+            ProblemDetail.forStatusAndDetail(responseCode.httpStatus, exception.message ?: responseCode.detail)
                 .withTitle(responseCode.title)
         ).build()
     }

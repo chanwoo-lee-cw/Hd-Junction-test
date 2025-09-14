@@ -19,6 +19,6 @@ enum class ExceptionCode(
     INVALID_REQUEST_NOT_SEARCH_TYPE("INVALID_REQUEST_NOT_SEARCH_TYPE", HttpStatus.BAD_REQUEST, "검색 필터의 타입이 없습니다."),
 
     // 500 Error
-    SERVER_ERROR("SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR),
+    SERVER_ERROR("SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR, "요청을 처리 중 문제가 발생했습니다."),
 
 }
